@@ -4,39 +4,41 @@
 [![Built with Ona](https://ona.com/build-with-ona.svg)](https://app.ona.com/#https://github.com/Interested-Deving-1896/eggs-gui)
 
 <!-- AI:start:what-it-does -->
-This project provides a unified graphical user interface (GUI) for managing the penguins-eggs system, combining multiple frontends: a Go-based daemon, a BubbleTea terminal UI (TUI), a NodeGUI desktop application, and a NiceGUI web interface. It is designed for developers and system administrators who need a centralized and flexible way to interact with penguins-eggs across different environments.
+This project provides a unified graphical user interface (GUI) for managing and interacting with the penguins-eggs system. It integrates multiple components, including a Go-based daemon, a BubbleTea terminal user interface (TUI), a NodeGUI desktop application, and a NiceGUI web frontend. It is designed for users who need a cohesive interface to streamline operations across these platforms.
 <!-- AI:end:what-it-does -->
 
 ## Architecture
 
 <!-- AI:start:architecture -->
-The project consists of four main components that interact to provide a unified GUI for penguins-eggs:
+The `eggs-gui` project consists of four main components that interact to provide a unified GUI for penguins-eggs:
 
 1. **Go Daemon (`daemon`)**: A backend service written in Go that handles core operations and communicates with other components.
-2. **BubbleTea TUI (`tui`)**: A terminal-based user interface built with the BubbleTea framework, which interacts with the daemon.
-3. **NodeGUI Desktop (`desktop`)**: A desktop application built with NodeGUI, providing a graphical interface that communicates with the daemon.
-4. **NiceGUI Web Frontend (`web`)**: A web-based interface built with Python and NiceGUI, also interacting with the daemon.
+2. **BubbleTea TUI (`tui`)**: A terminal-based user interface built with the BubbleTea framework, which interacts with the daemon for CLI users.
+3. **NodeGUI Desktop (`desktop`)**: A desktop application built with NodeGUI, providing a graphical interface for desktop environments.
+4. **NiceGUI Web Frontend (`web`)**: A Python-based web application using NiceGUI for browser-based interaction.
 
-The daemon serves as the central component, managing the application's state and providing APIs for the TUI, desktop, and web interfaces. Each frontend communicates with the daemon to perform operations and display data.
+The components communicate with the Go daemon as the central backend. The TUI, desktop, and web frontends act as clients, sending requests to and receiving responses from the daemon.
 
 The repository structure is as follows:
 
 ```plaintext
 .
-├── Makefile          # Build and run commands
-├── README.md         # Project documentation
-├── LICENSE           # License information
-├── daemon/           # Go daemon source code
-├── tui/              # BubbleTea TUI source code
-├── desktop/          # NodeGUI desktop app source code
-├── web/              # NiceGUI web frontend source code
-├── assets/           # Static assets (e.g., icons, desktop files)
-├── config/           # Configuration files
-├── proto/            # Protocol buffer definitions
-├── scripts/          # Helper scripts
-├── locales/          # Localization files
-└── .github/          # GitHub workflows and CI/CD configurations
+├── .github/             # GitHub workflows and CI/CD configurations
+├── assets/              # Static assets (e.g., icons, desktop files)
+├── daemon/              # Go daemon source code
+├── desktop/             # NodeGUI desktop application
+├── locales/             # Localization files
+├── proto/               # Protocol buffer definitions
+├── scripts/             # Utility scripts
+├── tui/                 # BubbleTea TUI source code
+├── web/                 # NiceGUI web frontend
+├── Makefile             # Build and run commands
+├── LICENSE              # License file
+├── README.md            # Project documentation
+└── ARCHITECTURE.md      # Detailed architecture documentation
 ```
+
+The `Makefile` provides targets for building and running each component, as well as cleaning up and packaging the project.
 <!-- AI:end:architecture -->
 
 ## Install
@@ -61,20 +63,24 @@ cd eggs-gui
 <!-- AI:start:ci -->
 The repository uses GitHub Actions for continuous integration and automation. Below are the workflows and their purposes:
 
-- **check-gitlab-sync.yml**: Verifies synchronization between GitHub and GitLab repositories.
-- **cleanup-branches.yml**: Removes stale branches from the repository.
-- **cleanup-pollution.yml**: Cleans up temporary or unnecessary files.
-- **mirror.yaml**: Mirrors the repository to other platforms.
+- **add-mirror-repo.yml**: Adds new repositories to the mirror list.
+- **check-gitlab-sync.yml**: Verifies synchronization status between GitHub and GitLab.
+- **cleanup-pollution.yml**: Removes unnecessary files or artifacts from the repository.
+- **mirror-orgs-full.yml**: Mirrors all repositories from an organization to another.
+- **mirror-orgs-watchdog.yml**: Monitors and ensures ongoing synchronization of mirrored organizations.
+- **mirror-osp-to-gitlab.yml**: Mirrors open-source projects to GitLab.
+- **mirror-releases.yml**: Syncs release artifacts across repositories.
 - **pr-automation.yml**: Automates pull request labeling and merging.
-- **rate-limit-status.yml**: Monitors API rate limits and logs status.
-- **rotate-token.yml**: Rotates authentication tokens for security.
-- **sync-forks.yml**: Synchronizes forks with their upstream repositories.
-- **update-readmes.yml**: Updates README files across the repository.
+- **rate-limit-status.yml**: Monitors API rate limits and logs usage.
+- **sync-eggs-docs-to-book.yml**: Syncs documentation to the project’s book format.
+- **sync-to-gitlab.yml**: Syncs changes from GitHub to GitLab repositories.
+- **token-health.yml**: Checks the validity and expiration of authentication tokens.
+- **update-readmes.yml**: Updates README files across repositories.
 
 Required secrets:
-- `GITHUB_TOKEN`: Automatically provided by GitHub for repository-related actions.
-- `GL_ACCESS_TOKEN`: Required for GitLab synchronization workflows.
-- `MIRROR_API_KEY`: Needed for mirroring workflows to external platforms.
+- `GITHUB_TOKEN`: Default token for repository access.
+- `GITLAB_TOKEN`: Token for GitLab API access.
+- `MIRROR_API_KEY`: Key for external mirroring services.
 <!-- AI:end:ci -->
 
 ## Mirror chain
@@ -94,7 +100,7 @@ Direct commits to OSP or OOC are detected and opened as PRs back to `Interested-
 ## Contributors
 
 <!-- AI:start:contributors -->
-[@Interested-Deving-1896](https://github.com/Interested-Deving-1896): 267 commits
+[@Interested-Deving-1896](https://github.com/Interested-Deving-1896): 368 commits
 <!-- AI:end:contributors -->
 
 ## Origins
