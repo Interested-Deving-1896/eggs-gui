@@ -4,41 +4,37 @@
 [![Built with Ona](https://ona.com/build-with-ona.svg)](https://app.ona.com/#https://github.com/Interested-Deving-1896/eggs-gui)
 
 <!-- AI:start:what-it-does -->
-This project provides a unified graphical user interface (GUI) for managing and interacting with the penguins-eggs system. It integrates multiple components, including a Go-based daemon, a BubbleTea terminal user interface (TUI), a NodeGUI desktop application, and a NiceGUI web frontend. It is designed for users who need a cohesive interface to streamline operations across these platforms.
+This project provides a unified graphical user interface (GUI) for managing the penguins-eggs system, combining multiple components: a Go-based daemon, a BubbleTea terminal user interface (TUI), a NodeGUI desktop application, and a NiceGUI web frontend. It simplifies interaction with penguins-eggs for developers and system administrators by offering multiple access points tailored to different use cases and environments.
 <!-- AI:end:what-it-does -->
 
 ## Architecture
 
 <!-- AI:start:architecture -->
-The `eggs-gui` project consists of four main components that interact to provide a unified GUI for penguins-eggs:
+The project consists of four main components that interact to provide a unified GUI for penguins-eggs:
 
-1. **Go Daemon (`daemon`)**: A backend service written in Go that handles core operations and communicates with other components.
-2. **BubbleTea TUI (`tui`)**: A terminal-based user interface built with the BubbleTea framework, which interacts with the daemon for CLI users.
-3. **NodeGUI Desktop (`desktop`)**: A desktop application built with NodeGUI, providing a graphical interface for desktop environments.
-4. **NiceGUI Web Frontend (`web`)**: A Python-based web application using NiceGUI for browser-based interaction.
+1. **Daemon**: A Go-based backend service (`eggs-daemon`) that handles core operations. It must be running for other components to function.
+2. **TUI**: A terminal-based user interface built with BubbleTea (`eggs-tui`) that communicates with the daemon.
+3. **Desktop**: A desktop GUI built using NodeGUI. It requires the daemon to be running and uses `npm` for building and running.
+4. **Web**: A web-based frontend built with NiceGUI. It requires Python and the daemon to be running.
 
-The components communicate with the Go daemon as the central backend. The TUI, desktop, and web frontends act as clients, sending requests to and receiving responses from the daemon.
+The components communicate with the daemon, which acts as the central service. The TUI, desktop, and web interfaces interact with the daemon to perform operations and display results.
 
-The repository structure is as follows:
-
+Directory structure:
 ```plaintext
 .
-├── .github/             # GitHub workflows and CI/CD configurations
-├── assets/              # Static assets (e.g., icons, desktop files)
-├── daemon/              # Go daemon source code
-├── desktop/             # NodeGUI desktop application
-├── locales/             # Localization files
-├── proto/               # Protocol buffer definitions
-├── scripts/             # Utility scripts
-├── tui/                 # BubbleTea TUI source code
-├── web/                 # NiceGUI web frontend
-├── Makefile             # Build and run commands
-├── LICENSE              # License file
-├── README.md            # Project documentation
-└── ARCHITECTURE.md      # Detailed architecture documentation
+├── assets/          # Static assets (e.g., icons, desktop files)
+├── daemon/          # Go daemon source code
+├── desktop/         # NodeGUI desktop application
+├── locales/         # Localization files
+├── proto/           # Protocol buffer definitions
+├── scripts/         # Utility scripts
+├── tui/             # BubbleTea TUI source code
+├── web/             # NiceGUI web frontend
+├── Makefile         # Build and run tasks
+├── LICENSE          # License file
+├── README.md        # Project documentation
+└── ARCHITECTURE.md  # Detailed architecture documentation
 ```
-
-The `Makefile` provides targets for building and running each component, as well as cleaning up and packaging the project.
 <!-- AI:end:architecture -->
 
 ## Install
