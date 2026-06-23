@@ -29,6 +29,8 @@ permissions:
   contents: write
   pull-requests: write
   id-token: write  # Added permission for id-token
+  # Added permission for pull-requests to allow opening PRs
+  pull-requests: write
 
 # ── Rate limits ──────────────────────────────────────────────────────────────
 # GitHub REST API (SYNC_TOKEN): 5 000 req/hr primary limit.
