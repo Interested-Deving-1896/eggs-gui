@@ -54,18 +54,18 @@ cd eggs-gui
 ## CI
 
 <!-- AI:start:ci -->
-The repository uses GitHub Actions for continuous integration and automation. Below are the key workflows:
+The repository uses GitHub Actions for continuous integration and deployment. Below are the relevant workflows:
 
 - **build.yml**: Builds the project for all supported platforms. No secrets required.
 - **build-x86.yml**: Builds the project specifically for x86 architecture. No secrets required.
 - **build-arm64.yml**: Builds the project specifically for ARM64 architecture. No secrets required.
-- **ci.yaml**: Runs tests, lints code, and performs static analysis. No secrets required.
-- **deploy-book.yml**: Deploys the documentation to the designated hosting platform. Requires `DOCS_DEPLOY_TOKEN` secret.
-- **mirror-to-osp.yml**: Mirrors the repository to the Open Source Program (OSP) platform. Requires `OSP_TOKEN` secret.
-- **sync-to-gitlab.yml**: Syncs the repository with GitLab. Requires `GITLAB_TOKEN` secret.
-- **release.yaml**: Automates the release process, including tagging and publishing. Requires `RELEASE_TOKEN` secret.
-- **labeler.yml**: Automatically applies labels to pull requests based on file changes. No secrets required.
-- **pr-automation.yml**: Manages pull request workflows, including auto-merge and stale PR handling. No secrets required.
+- **ci.yaml**: Runs linting, tests, and other CI checks. No secrets required.
+- **deploy-book.yml**: Deploys the documentation to the designated hosting service. Requires `DOCS_DEPLOY_KEY`.
+- **mirror-artifacts.yml**: Mirrors build artifacts to external storage. Requires `ARTIFACT_STORAGE_KEY`.
+- **sync-to-gitlab.yml**: Syncs the repository to a GitLab mirror. Requires `GITLAB_TOKEN`.
+- **release.yaml**: Handles the release process, including tagging and publishing. Requires `GITHUB_TOKEN` and `NPM_TOKEN`.
+
+Refer to the `.github/workflows/` directory for detailed configurations. Ensure required secrets are added to the repository settings before running workflows.
 <!-- AI:end:ci -->
 
 ## Mirror chain
