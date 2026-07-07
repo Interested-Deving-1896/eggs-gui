@@ -55,18 +55,17 @@ cd eggs-gui
 ## CI
 
 <!-- AI:start:ci -->
-The repository uses GitHub Actions for continuous integration and deployment. Below are the relevant workflows:
-
-- **build.yml**: Builds the project for all supported platforms. No secrets required.
-- **build-x86.yml**: Builds the project specifically for x86 architecture. No secrets required.
-- **build-arm64.yml**: Builds the project specifically for ARM64 architecture. No secrets required.
-- **ci.yaml**: Runs linting, tests, and other CI checks. No secrets required.
-- **deploy-book.yml**: Deploys the documentation to the designated hosting service. Requires `DOCS_DEPLOY_KEY`.
-- **mirror-artifacts.yml**: Mirrors build artifacts to external storage. Requires `ARTIFACT_STORAGE_KEY`.
-- **sync-to-gitlab.yml**: Syncs the repository to a GitLab mirror. Requires `GITLAB_TOKEN`.
-- **release.yaml**: Handles the release process, including tagging and publishing. Requires `GITHUB_TOKEN` and `NPM_TOKEN`.
-
-Refer to the `.github/workflows/` directory for detailed configurations. Ensure required secrets are added to the repository settings before running workflows.
+- **build.yml**: Builds the project binaries and packages for all supported platforms. No secrets required.
+- **build-x86.yml**: Builds and tests the project for x86 architecture. No secrets required.
+- **build-arm64.yml**: Builds and tests the project for ARM64 architecture. No secrets required.
+- **deploy-book.yml**: Deploys documentation updates to the project's book repository. Requires `BOOK_DEPLOY_TOKEN`.
+- **mirror-orgs-full.yml**: Mirrors repositories from the organization to external platforms. Requires `MIRROR_TOKEN`.
+- **sync-to-gitlab.yml**: Synchronizes changes from GitHub to GitLab repositories. Requires `GITLAB_TOKEN`.
+- **check-accessibility.yml**: Runs accessibility checks on web assets. No secrets required.
+- **labeler.yml**: Automatically applies labels to pull requests based on file changes. No secrets required.
+- **release.yaml**: Handles version tagging and release creation. Requires `RELEASE_TOKEN`.
+- **rotate-token.yml**: Rotates API tokens used in workflows. Requires `ADMIN_TOKEN`.
+- **validate-readme-render.yml**: Ensures README formatting and rendering correctness. No secrets required.
 <!-- AI:end:ci -->
 
 ## Mirror chain
