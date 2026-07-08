@@ -60,7 +60,8 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y -qq createrepo-c flatpak ostree jq
+          sudo apt-get install -y -qq createrepo-c flatpak ostree jq || true
+          sudo apt-get install -y -qq --no-install-recommends apt-transport-https
 
       - name: Mirror artifacts
         env:
