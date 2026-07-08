@@ -4,35 +4,33 @@
 [![Built with Ona](https://ona.com/build-with-ona.svg)](https://app.ona.com/#https://github.com/Interested-Deving-1896/eggs-gui)
 
 <!-- AI:start:what-it-does -->
-This project provides a unified graphical user interface (GUI) for managing and interacting with Penguins-Eggs, a tool for creating and customizing Linux live systems. It integrates multiple components, including a Go-based daemon, a BubbleTea terminal UI, a NodeGUI desktop application, and a NiceGUI web frontend. It is used by developers and system administrators to streamline tasks such as ISO building, configuration generation, and diagnostics.
+This project provides a unified graphical user interface (GUI) for managing and interacting with Penguins-Eggs, a tool for creating and customizing Linux live systems and ISOs. It integrates multiple components, including a Go-based daemon, a terminal user interface (TUI) built with BubbleTea, a desktop application using NodeGUI, and a web interface powered by NiceGUI. It is designed for developers and system administrators who need a streamlined way to perform diagnostics, build ISOs, generate configurations, and access a knowledge base.
 <!-- AI:end:what-it-does -->
 
 ## Architecture
 
 <!-- AI:start:architecture -->
-The project consists of four primary components: a Go-based daemon, a BubbleTea-powered TUI, a NodeGUI desktop application, and a NiceGUI web frontend. These components interact with each other through the Go daemon, which serves as the central backend service. The TUI, desktop, and web interfaces communicate with the daemon to perform tasks such as diagnostics, ISO building, and configuration management.
+The project consists of a unified GUI for Penguins-Eggs, combining multiple components: a Go-based daemon, a BubbleTea TUI, a NodeGUI desktop app, and a NiceGUI web frontend. These components interact through a shared backend service (the daemon), which provides core functionality such as diagnostics, ISO building, and configuration management. The TUI, desktop, and web frontends act as clients to the daemon, communicating via APIs or IPC mechanisms.
 
-The repository is organized as follows:
+The repository is structured as follows:
 
 ```plaintext
 .
 ├── bin/                # Compiled binaries for daemon and TUI
-├── daemon/             # Go daemon source code
-│   └── cmd/            # Daemon entry point
-├── tui/                # BubbleTea TUI source code
-│   └── cmd/            # TUI entry point
-├── desktop/            # NodeGUI desktop application
-│   ├── src/            # Source code
-│   └── dist/           # Build output
-├── web/                # NiceGUI web frontend
-│   ├── main.py         # Web server entry point
-│   └── requirements.txt # Python dependencies
-├── Makefile            # Build and run tasks
-├── package.json        # Node.js project configuration
-└── README.md           # Project documentation
+├── daemon/             # Go-based backend service
+├── tui/                # BubbleTea-based terminal UI
+├── desktop/            # NodeGUI-based desktop app
+├── web/                # NiceGUI-based web frontend
+├── proto/              # Protocol definitions for API communication
+├── configs/            # Configuration files and templates
+├── assets/             # Static assets (e.g., icons, desktop entry files)
+├── doc/                # Documentation files
+├── Makefile            # Build and run automation
+├── package.json        # Node.js project metadata and scripts
+└── README.md           # Project overview and usage instructions
 ```
 
-The `Makefile` provides targets to build and run each component individually or together. The `package.json` defines scripts and dependencies for the Node.js-based components.
+Each component can be built and run independently or together using the `Makefile`. The daemon must be running for the TUI, desktop, or web frontends to function.
 <!-- AI:end:architecture -->
 
 ## Install
@@ -55,16 +53,18 @@ cd eggs-gui
 ## CI
 
 <!-- AI:start:ci -->
-- **build.yml**: Builds the project binaries and packages for all supported platforms. No secrets required.
-- **build-x86.yml**: Builds and tests the project for x86 architecture. No secrets required.
-- **build-arm64.yml**: Builds and tests the project for ARM64 architecture. No secrets required.
-- **deploy-book.yml**: Deploys documentation updates to the project's book repository. Requires `BOOK_DEPLOY_TOKEN`.
-- **mirror-orgs-full.yml**: Mirrors repositories from the organization to external platforms. Requires `MIRROR_TOKEN`.
-- **sync-to-gitlab.yml**: Synchronizes changes from GitHub to GitLab repositories. Requires `GITLAB_TOKEN`.
-- **check-accessibility.yml**: Runs accessibility checks on web assets. No secrets required.
+- **build.yml**: Builds the project binaries and packages for all supported architectures. No secrets required.
+- **build-x86.yml**: Builds the project specifically for x86 architecture. No secrets required.
+- **build-arm64.yml**: Builds the project for ARM64 architecture. No secrets required.
+- **deploy-book.yml**: Deploys documentation to the project's book site. Requires `DOCS_DEPLOY_KEY` secret.
+- **mirror-artifacts.yml**: Mirrors build artifacts to external storage. Requires `MIRROR_STORAGE_KEY` secret.
+- **sync-to-gitlab.yml**: Syncs repository changes to GitLab. Requires `GITLAB_TOKEN` secret.
+- **check-accessibility.yml**: Runs accessibility checks on the web frontend. No secrets required.
 - **labeler.yml**: Automatically applies labels to pull requests based on file changes. No secrets required.
-- **release.yaml**: Handles version tagging and release creation. Requires `RELEASE_TOKEN`.
-- **rotate-token.yml**: Rotates API tokens used in workflows. Requires `ADMIN_TOKEN`.
+- **release.yml**: Handles version tagging and release creation. Requires `GH_TOKEN` secret.
+- **ci.yaml**: Runs unit tests, linting, and integration tests. No secrets required.
+- **cleanup-pollution.yml**: Cleans up temporary files and artifacts after CI runs. No secrets required.
+- **rotate-token.yml**: Rotates API tokens for external integrations. Requires `TOKEN_ROTATION_KEY` secret.
 - **validate-readme-render.yml**: Ensures README formatting and rendering correctness. No secrets required.
 <!-- AI:end:ci -->
 
