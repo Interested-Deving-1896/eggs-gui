@@ -85,7 +85,9 @@ Direct commits to OSP or OOC are detected and opened as PRs back to `Interested-
 ## Contributors
 
 <!-- AI:start:contributors -->
-[@Interested-Deving-1896](https://github.com/Interested-Deving-1896): 859 commits
+[@Interested-Deving-1896](https://github.com/Interested-Deving-1896): 870 commits
+
+Note: This repository is a mirror. Please refer to the upstream source for additional contributions and context.
 <!-- AI:end:contributors -->
 
 ## Origins
@@ -103,5 +105,5 @@ _No additional resource files found._
 ## License
 
 <!-- AI:start:license -->
-[MIT](https://github.com/Interested-Deving-1896/eggs-gui/blob/master/LICENSE) © 2026 [Interested-Deving-1896](https://github.com/Interested-Deving-1896)
+<!-- License not detected — add a LICENSE file to this repo. -->
 <!-- AI:end:license -->
